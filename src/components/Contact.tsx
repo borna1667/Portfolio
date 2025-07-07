@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Github, Linkedin, MessageSquare, Trophy, Coffee } from 'lucide-react'
+import { Mail, Github, MessageSquare } from 'lucide-react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
@@ -32,44 +32,23 @@ export default function Contact() {
     {
       icon: <Mail className="w-8 h-8" />,
       title: "Email",
-      value: "contact@borna.dev",
-      link: "mailto:contact@borna.dev",
+      value: "borna.bratranek@gmail.com",
+      link: "mailto:borna.bratranek@gmail.com",
       color: "from-red-400 to-orange-500"
     },
     {
       icon: <Github className="w-8 h-8" />,
       title: "GitHub",
-      value: "BornaDev",
-      link: "https://github.com/bornadev",
+      value: "borna1667",
+      link: "https://github.com/borna1667",
       color: "from-gray-400 to-gray-600"
-    },
-    {
-      icon: <Linkedin className="w-8 h-8" />,
-      title: "LinkedIn",
-      value: "Borna",
-      link: "https://linkedin.com/in/borna",
-      color: "from-blue-400 to-blue-600"
     },
     {
       icon: <MessageSquare className="w-8 h-8" />,
       title: "Discord",
-      value: "@borna",
-      link: "#",
+      value: ".borna.",
+      link: "https://discord.com/users/.borna.",
       color: "from-purple-400 to-indigo-500"
-    },
-    {
-      icon: <Trophy className="w-8 h-8" />,
-      title: "HackerRank",
-      value: "Borna",
-      link: "https://hackerrank.com/borna",
-      color: "from-green-400 to-emerald-500"
-    },
-    {
-      icon: <Coffee className="w-8 h-8" />,
-      title: "Ko-fi",
-      value: "borna",
-      link: "https://ko-fi.com/borna",
-      color: "from-yellow-400 to-orange-500"
     }
   ]
 
