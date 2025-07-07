@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ChevronDown, Sparkles, Code, Palette } from 'lucide-react'
+import { ChevronDown, Sparkles, Code, Palette, Box } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
@@ -9,6 +10,7 @@ export default function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null)
   const subtitleRef = useRef<HTMLParagraphElement>(null)
   const { scrollYProgress } = useScroll()
+  const navigate = useNavigate()
   
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
@@ -169,7 +171,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.5 }}
@@ -192,6 +194,29 @@ export default function Hero() {
               animate={{ 
                 x: ['-100%', '100%'],
                 transition: { duration: 1.5, repeat: Infinity, repeatDelay: 3 }
+              }}
+            />
+          </motion.button>
+          
+          <motion.button
+            onClick={() => navigate('/blender')}
+            className="relative group bg-gradient-to-r from-orange-500 to-red-600 text-white px-8 py-4 rounded-lg font-medium overflow-hidden flex items-center gap-2"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Box size={20} />
+            <span className="relative z-10">Blender Projects</span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-700"
+              initial={{ x: '-100%' }}
+              whileHover={{ x: '0%' }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.div
+              className="absolute inset-0 bg-white/20"
+              animate={{ 
+                x: ['-100%', '100%'],
+                transition: { duration: 1.5, repeat: Infinity, repeatDelay: 4 }
               }}
             />
           </motion.button>

@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,18 +19,40 @@ export default function Header() {
   }, [])
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+    // If we're not on the home page, navigate to home first
+    if (location.pathname !== '/') {
+      navigate('/')
+      setTimeout(() => {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    } else {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
     }
     setIsMenuOpen(false)
   }
 
+  const navigateToBlender = () => {
+    navigate('/blender')
+    setIsMenuOpen(false)
+  }
+
+  const navigateToHome = () => {
+    navigate('/')
+    setIsMenuOpen(false)
+  }
+
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'home', label: 'Home', action: () => navigateToHome() },
+    { id: 'about', label: 'About', action: () => scrollToSection('about') },
+    { id: 'projects', label: 'Projects', action: () => scrollToSection('projects') },
+    { id: 'blender', label: 'Blender', action: () => navigateToBlender() },
+    { id: 'contact', label: 'Contact', action: () => scrollToSection('contact') },
   ]
 
   return (
@@ -43,20 +68,21 @@ export default function Header() {
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <motion.div
+          <motion.button
+            onClick={navigateToHome}
             className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           >
             Borna.dev
-          </motion.div>
+          </motion.button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={item.action}
                 className="text-gray-300 hover:text-white transition-colors relative"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -94,7 +120,7 @@ export default function Header() {
               {navItems.map((item) => (
                 <motion.button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={item.action}
                   className="text-gray-300 hover:text-white transition-colors text-left"
                   whileHover={{ x: 10 }}
                   whileTap={{ scale: 0.95 }}
