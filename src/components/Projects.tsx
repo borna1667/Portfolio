@@ -30,53 +30,33 @@ export default function Projects() {
 
   const projects = [
     {
-      title: "Unified",
-      description: "A modern link-in-bio platform bringing together all your online presence",
-      tech: ["React", "TypeScript", "Tailwind", "Django"],
-      stars: 39,
+      title: "Portfolio",
+      description: "Modern and responsive portfolio website built with React, TypeScript, and advanced animations showcasing my development skills and projects",
+      tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "GSAP"],
+      stars: 0,
       status: "In Development",
       image: "/api/placeholder/400/250",
-      github: "https://github.com/zzan54/unified",
-      demo: "https://unified-demo.com"
-    },
-    {
-      title: "BananaDropFarm",
-      description: "Banana Drop Farm is a game cheat for game Banana. This mod menu can change the score in the game and bypass the idle bot check.",
-      tech: ["Python"],
-      stars: 39,
-      status: "Completed",
-      image: "/api/placeholder/400/250",
-      github: "https://github.com/zzan54/BananaDropFarm",
+      github: "https://github.com/borna1667/Portfolio",
       demo: null
     },
     {
-      title: "P0rtal",
-      description: "Portal stands as an open-source and freely accessible tool for discord server nuking, raiding and destroying.",
-      tech: ["Python"],
-      stars: 8,
+      title: "Sheep AI Project",
+      description: "An AI-powered application built with TypeScript focusing on machine learning capabilities and intelligent automation features",
+      tech: ["TypeScript", "JavaScript", "CSS", "HTML"],
+      stars: 0,
       status: "Completed",
       image: "/api/placeholder/400/250",
-      github: "https://github.com/zzan54/P0rtal",
+      github: "https://github.com/borna1667/Sheep-ai-project",
       demo: null
     },
     {
-      title: "EXEConverter",
-      description: "EXEConverter is a simple tool that allows you to convert any .exe file into various encoded formats (Base64, Hex, and Binary) and back.",
-      tech: ["Batchfile"],
-      stars: 5,
-      status: "Completed",
+      title: "KeysNCaps Project",
+      description: "A project focused on keyboard customization and keycap management system for mechanical keyboard enthusiasts",
+      tech: ["Web Technologies"],
+      stars: 0,
+      status: "In Development",
       image: "/api/placeholder/400/250",
-      github: "https://github.com/zzan54/EXEConverter",
-      demo: null
-    },
-    {
-      title: "optimizer",
-      description: "The finest Windows Optimizer",
-      tech: ["C#"],
-      stars: 1,
-      status: "Completed",
-      image: "/api/placeholder/400/250",
-      github: "https://github.com/zzan54/optimizer",
+      github: "https://github.com/borna1667/Keysncaps-project",
       demo: null
     }
   ]
@@ -98,7 +78,7 @@ export default function Projects() {
           <motion.div
             className="flex items-center justify-center gap-2 text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
             whileHover={{ scale: 1.05 }}
-            onClick={() => window.open('https://github.com/zzan54', '_blank')}
+            onClick={() => window.open('https://github.com/borna1667', '_blank')}
           >
             <span className="text-lg font-medium">View Profile</span>
             <ExternalLink size={20} />
@@ -164,7 +144,7 @@ export default function Projects() {
                   </motion.button>
                   {project.demo && (
                     <motion.button
-                      onClick={() => window.open(project.demo, '_blank')}
+                      onClick={() => window.open(project.demo!, '_blank')}
                       className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
@@ -187,7 +167,7 @@ export default function Projects() {
           viewport={{ once: true }}
         >
           <motion.button
-            onClick={() => window.open('https://github.com/zzan54?tab=repositories', '_blank')}
+            onClick={() => window.open('https://github.com/borna1667?tab=repositories', '_blank')}
             className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-blue-500/25"
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(59, 130, 246, 0.3)" }}
             whileTap={{ scale: 0.95 }}
