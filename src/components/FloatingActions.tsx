@@ -4,7 +4,6 @@ import { ArrowUp, Github, Mail, MessageSquare, Palette } from 'lucide-react'
 
 const FloatingActions = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [theme, setTheme] = useState<'dark' | 'blue' | 'purple'>('dark')
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -37,16 +36,7 @@ const FloatingActions = () => {
     }
   ]
 
-  const toggleTheme = () => {
-    const themes: ('dark' | 'blue' | 'purple')[] = ['dark', 'blue', 'purple']
-    const currentIndex = themes.indexOf(theme)
-    const nextTheme = themes[(currentIndex + 1) % themes.length]
-    setTheme(nextTheme)
-    
-    // Apply theme to document
-    const root = document.documentElement
-    root.style.setProperty('--primary-hue', nextTheme === 'blue' ? '220' : nextTheme === 'purple' ? '270' : '220')
-  }
+
 
   return (
     <div className="fixed bottom-8 right-8 z-40">
