@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docker:build": "docker build -t my-portfolio .",
+    "docker:run": "docker run -p 80:80 my-portfolio",
+    "docker:compose": "docker-compose up --build"
   },
   "dependencies": {
     "@react-three/drei": "^10.4.2",

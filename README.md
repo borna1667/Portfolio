@@ -1,69 +1,163 @@
-# React + TypeScript + Vite
+# My Portfolio - DigitalOcean Deployment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React portfolio website built with TypeScript, Three.js, GSAP, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🎨 Modern, responsive design
+- 🎯 Smooth scroll animations with GSAP
+- 🌐 3D interactive elements with Three.js
+- ⚡ Fast performance with Vite
+- 🐳 Docker containerized for easy deployment
+- 🚀 Ready for DigitalOcean deployment
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**: React 19, TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: GSAP with ScrollTrigger
+- **3D Graphics**: Three.js with React Three Fiber
+- **Build Tool**: Vite
+- **Deployment**: Docker + Nginx
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Local Development
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Start development server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+4. **Preview production build**:
+   ```bash
+   npm run preview
+   ```
+
+## Docker Deployment
+
+### Build and run locally:
+
+```bash
+# Build the Docker image
+docker build -t my-portfolio .
+
+# Run the container
+docker run -p 80:80 my-portfolio
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Using Docker Compose:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Build and start
+docker-compose up --build
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Run in background
+docker-compose up -d --build
+```
+
+## DigitalOcean Deployment
+
+### Option 1: App Platform (Recommended)
+
+1. **Push your code to GitHub**
+2. **Connect to DigitalOcean App Platform**:
+   - Go to [DigitalOcean App Platform](https://cloud.digitalocean.com/apps)
+   - Click "Create App"
+   - Connect your GitHub repository
+   - Choose the branch (usually `main`)
+
+3. **Configure build settings**:
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+   - Run Command: Leave empty (static site)
+
+4. **Deploy**: DigitalOcean will automatically build and deploy your app
+
+### Option 2: Droplet with Docker
+
+1. **Create a Droplet**:
+   - Choose Ubuntu 22.04 LTS
+   - Select appropriate size (Basic $6/month is sufficient)
+   - Add SSH key
+
+2. **Connect to your Droplet**:
+   ```bash
+   ssh root@your-droplet-ip
+   ```
+
+3. **Install Docker**:
+   ```bash
+   curl -fsSL https://get.docker.com -o get-docker.sh
+   sh get-docker.sh
+   ```
+
+4. **Clone and deploy**:
+   ```bash
+   git clone your-repository-url
+   cd my-portfolio
+   docker-compose up -d --build
+   ```
+
+### Option 3: Static Site Hosting
+
+1. **Build locally**:
+   ```bash
+   npm run build
+   ```
+
+2. **Upload `dist/` folder** to DigitalOcean Spaces or any static hosting service
+
+## Environment Variables
+
+Create a `.env` file for any environment-specific configurations:
+
+```env
+VITE_API_URL=your-api-url
+```
+
+## Performance Optimizations
+
+- ✅ Nginx gzip compression enabled
+- ✅ Static asset caching (1 year)
+- ✅ Security headers configured
+- ✅ Optimized Docker multi-stage build
+- ✅ Vite code splitting and tree shaking
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details
+
+## Support
+
+For deployment issues or questions, please check:
+- [DigitalOcean Documentation](https://docs.digitalocean.com/)
+- [Vite Documentation](https://vitejs.dev/)
+- [React Documentation](https://react.dev/)
+
+---
+
+**Ready for production deployment on DigitalOcean! 🚀**
 ```

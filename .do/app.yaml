@@ -1,0 +1,16 @@
+name: my-portfolio
+services:
+- name: web
+  source_dir: /
+  github:
+    repo: your-username/my-portfolio
+    branch: main
+    deploy_on_push: true
+  run_command: npm run preview
+  build_command: npm run build
+  output_dir: dist
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  routes:
+  - path: /
