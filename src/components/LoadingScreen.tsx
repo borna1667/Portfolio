@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLoadingPreferences } from '../hooks/useLoadingPreferences'
 
 const LoadingScreen = () => {
-  const [isLoading, setIsLoading] = useState(true)
+  const { skipLoadingScreen, updatePreferences } = useLoadingPreferences()
+  const [isLoading, setIsLoading] = useState(!skipLoadingScreen)
   const [progress, setProgress] = useState(0)
   const [loadingText, setLoadingText] = useState('Initializing...')
   const [glitchActive, setGlitchActive] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [showSkip, setShowSkip] = useState(false)
 
   const loadingTexts = [
     'Initializing Neural Network...',
@@ -19,6 +22,12 @@ const LoadingScreen = () => {
   ]
 
   useEffect(() => {
+    // If user prefers to skip loading screen, don't show it
+    if (skipLoadingScreen) {
+      setIsLoading(false)
+      return
+    }
+
     // Detect mobile device
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
@@ -27,18 +36,36 @@ const LoadingScreen = () => {
     checkMobile()
     window.addEventListener('resize', checkMobile)
 
+    // Show skip button after 1.5 seconds (reduced from 2 seconds)
+    const skipTimer = setTimeout(() => {
+      setShowSkip(true)
+    }, 1500)
+
+    const handleSkip = () => {
+      setIsLoading(false)
+    }
+
+    // Add event listener for Enter key to skip
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        handleSkip()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+
     let textIndex = 0
     const textTimer = setInterval(() => {
       if (textIndex < loadingTexts.length - 1) {
         setLoadingText(loadingTexts[textIndex])
         textIndex++
       }
-    }, 500)
+    }, 180) // Reduced from 250ms to 180ms for faster text transitions
 
     // Reduce glitch frequency on mobile
     const glitchTimer = setInterval(() => {
       setGlitchActive(true)
-      setTimeout(() => setGlitchActive(false), 150)
+      setTimeout(() => setGlitchActive(false), 100) // Reduced glitch duration
     }, isMobile ? 5000 + Math.random() * 5000 : 2000 + Math.random() * 3000)
 
     const timer = setInterval(() => {
@@ -48,20 +75,22 @@ const LoadingScreen = () => {
           clearInterval(textTimer)
           clearInterval(glitchTimer)
           setLoadingText('Welcome to the Future!')
-          setTimeout(() => setIsLoading(false), 1200)
+          setTimeout(() => setIsLoading(false), 400) // Reduced from 600ms to 400ms
           return 100
         }
-        return prev + Math.random() * 12
+        return prev + Math.random() * 25 // Increased from 20 to 25 for faster progress
       })
-    }, 140)
+    }, 80) // Reduced from 100ms to 80ms for more frequent updates
 
     return () => {
       clearInterval(timer)
       clearInterval(textTimer)
       clearInterval(glitchTimer)
+      clearTimeout(skipTimer)
       window.removeEventListener('resize', checkMobile)
+      window.removeEventListener('keydown', handleKeyPress)
     }
-  }, [isMobile])
+  }, [skipLoadingScreen, isMobile])
 
   return (
     <AnimatePresence>
@@ -471,6 +500,35 @@ const LoadingScreen = () => {
                 </>
               )}
             </motion.div>
+
+            {/* Skip Button */}
+            {showSkip && (
+              <div className="absolute bottom-8 right-8 flex flex-col space-y-2">
+                <motion.button
+                  onClick={() => setIsLoading(false)}
+                  className="px-4 py-2 text-sm font-mono text-cyan-400 border border-cyan-400/30 rounded-lg bg-black/20 backdrop-blur-sm hover:bg-cyan-400/10 hover:border-cyan-400/60 transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Press Enter or Click to Skip
+                </motion.button>
+                <motion.button
+                  onClick={() => {
+                    updatePreferences({ skipLoadingScreen: true })
+                    setIsLoading(false)
+                  }}
+                  className="px-3 py-1 text-xs font-mono text-cyan-400/70 border border-cyan-400/20 rounded bg-black/10 backdrop-blur-sm hover:bg-cyan-400/5 hover:border-cyan-400/40 transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  Always Skip Loading
+                </motion.button>
+              </div>
+            )}
           </div>
         </motion.div>
       )}

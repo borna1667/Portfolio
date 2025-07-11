@@ -16,7 +16,6 @@
     -moz-osx-font-smoothing: grayscale;
     background-color: #0f0f23;
     color: #ffffff;
-    cursor: none; /* Hide default cursor for custom cursor */
   }
 }
 
@@ -370,9 +369,5 @@
   
   .glass {
     backdrop-filter: blur(5px);
-  }
-  
-  body {
-    cursor: auto; /* Show cursor on mobile */
   }
 }

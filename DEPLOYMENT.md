@@ -5,6 +5,7 @@
 ### 1. Repository Setup
 - [ ] Push code to GitHub repository
 - [ ] Ensure all sensitive data is in `.env` files (not committed)
+- [ ] **Set up contact form with Formspree (see Environment Variables section)**
 - [ ] Verify `.gitignore` includes deployment files if needed
 - [ ] Test local build: `npm run build`
 - [ ] Test local Docker build: `docker build -t my-portfolio .`
@@ -90,13 +91,24 @@
 
 ## Environment Variables
 
-If you need environment variables, create `.env` file:
+### Contact Form Setup (Required)
+1. [ ] Go to [Formspree.io](https://formspree.io/) and create a free account
+2. [ ] Create a new form and get your Form ID
+3. [ ] Go to [Cloudflare Turnstile](https://dash.cloudflare.com/) and create a site key
+4. [ ] Create `.env` file in project root:
+```env
+VITE_FORMSPREE_FORM_ID=your_formspree_form_id_here
+VITE_CLOUDFLARE_TURNSTILE_SITE_KEY=your_turnstile_site_key_here
+```
+
+### Other Environment Variables
+If you need additional environment variables, add them to your `.env` file:
 ```env
 VITE_API_URL=https://api.yourdomain.com
 VITE_ANALYTICS_ID=your-analytics-id
 ```
 
-Add these to your DigitalOcean App Platform environment variables.
+Add these to your DigitalOcean App Platform environment variables in the dashboard.
 
 ## Troubleshooting
 

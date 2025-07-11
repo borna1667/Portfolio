@@ -1,11 +1,13 @@
 import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Github, MessageSquare } from 'lucide-react'
+import { Mail, Github, MessageSquare, Send } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
 export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -104,8 +106,18 @@ export default function Contact() {
             <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
             <span className="text-lg font-medium">Available for new projects</span>
           </div>
-          <p className="text-gray-400 mb-2">Response time</p>
-          <p className="text-white text-xl font-semibold">Usually within 24 hours</p>
+          <p className="text-gray-400 mb-4">Response time</p>
+          <p className="text-white text-xl font-semibold mb-6">Usually within 24 hours</p>
+          
+          <motion.button
+            onClick={() => navigate('/contact')}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 group"
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            Send Message
+          </motion.button>
         </motion.div>
 
         <motion.div

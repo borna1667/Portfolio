@@ -222,7 +222,7 @@ export default function Hero() {
           </motion.button>
           
           <motion.button
-            onClick={() => window.open('mailto:contact@borna.dev', '_blank')}
+            onClick={() => navigate('/contact')}
             className="relative group border-2 border-gray-600 text-gray-300 px-8 py-4 rounded-lg font-medium overflow-hidden"
             whileHover={{ scale: 1.05, borderColor: '#3b82f6' }}
             whileTap={{ scale: 0.95 }}

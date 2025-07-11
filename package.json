@@ -13,6 +13,8 @@
     "docker:compose": "docker-compose up --build"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
+    "@marsidev/react-turnstile": "^1.1.0",
     "@react-three/drei": "^10.4.2",
     "@react-three/fiber": "^9.1.4",
     "@studio-freight/lenis": "^1.0.42",

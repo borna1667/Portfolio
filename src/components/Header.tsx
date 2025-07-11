@@ -47,12 +47,17 @@ export default function Header() {
     setIsMenuOpen(false)
   }
 
+  const navigateToContact = () => {
+    navigate('/contact')
+    setIsMenuOpen(false)
+  }
+
   const navItems = [
     { id: 'home', label: 'Home', action: () => navigateToHome() },
     { id: 'about', label: 'About', action: () => scrollToSection('about') },
     { id: 'projects', label: 'Projects', action: () => scrollToSection('projects') },
     { id: 'blender', label: 'Blender', action: () => navigateToBlender() },
-    { id: 'contact', label: 'Contact', action: () => scrollToSection('contact') },
+    { id: 'contact', label: 'Contact', action: () => navigateToContact() },
   ]
 
   return (
@@ -74,7 +79,7 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           >
-            Borna.dev
+            Borna.social
           </motion.button>
 
           {/* Desktop Navigation */}
